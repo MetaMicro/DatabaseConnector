@@ -1,6 +1,0 @@
-namespace DatabaseConnector.Areas.HelpPage.ModelDescriptions
-{
-    public class SimpleTypeModelDescription : ModelDescription
-    {
-    }
-}
