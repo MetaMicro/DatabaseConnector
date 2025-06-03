@@ -1,4 +1,4 @@
-﻿using DatabaseConnector.Extensions;
+using DatabaseConnector.Extensions;
 using DatabaseConnector.Models;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
