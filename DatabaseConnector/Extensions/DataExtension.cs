@@ -21,16 +21,15 @@ namespace DatabaseConnector.Extensions
         /// <returns>A DataSet Object with all responses from the server</returns>
         public static DataSet GetDataSetSQL(string connectionString, string sqlCommand)
         {
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlDataAdapter da = new SqlDataAdapter();
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = sqlCommand;
-            da.SelectCommand = cmd;
             DataSet ds = new DataSet();
-
-            conn.Open();
-            da.Fill(ds);
-            conn.Close();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                cmd.CommandText = sqlCommand;
+                conn.Open();
+                da.Fill(ds);
+            }
 
             return ds;
         }
@@ -43,16 +42,15 @@ namespace DatabaseConnector.Extensions
         /// <returns>A DataSet Object with all responses from the server</returns>
         public static DataSet GetDataSetMySQL(string connectionString, string sqlCommand)
         {
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            MySqlDataAdapter da = new MySqlDataAdapter();
-            MySqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = sqlCommand;
-            da.SelectCommand = cmd;
             DataSet ds = new DataSet();
-
-            conn.Open();
-            da.Fill(ds);
-            conn.Close();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            using (MySqlCommand cmd = conn.CreateCommand())
+            using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+            {
+                cmd.CommandText = sqlCommand;
+                conn.Open();
+                da.Fill(ds);
+            }
 
             return ds;
         }
